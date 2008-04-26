@@ -2,7 +2,7 @@ program PathMan;
 
 uses
   Forms,
-  main in '..\PathSetter\main.pas' {frmMain};
+  Main in 'Main.pas' {frmMain};
 
 {$R *.res}
 

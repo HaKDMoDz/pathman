@@ -82,6 +82,7 @@ begin
       envstr := StringReplace(lstPathList.Items.DelimitedText, '"','',[rfReplaceAll]);
       WriteString('Path',envstr);
       SendMessage(HWND_BROADCAST, WM_SETTINGCHANGE, 0, Integer(PChar('Environment')));
+      SendMessage(HWND_BROADCAST, WM_WININICHANGE, 0, Integer(PChar('Environment')));
     end;
   finally
     Free;

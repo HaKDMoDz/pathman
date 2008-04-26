@@ -1,6 +1,6 @@
 object frmMain: TfrmMain
-  Left = 398
-  Top = 136
+  Left = 457
+  Top = 221
   BorderStyle = bsSingle
   Caption = 'PathMan'
   ClientHeight = 421
