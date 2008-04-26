@@ -1,0 +1,22 @@
+#
+#Sat Apr 26 16:56:41 CST 2008
+genBasicCompId=false
+sessionFactoryName=org.kx.dao.HibernateSessionFactory
+profile=
+daoSFId=
+version=3.1
+jndiPath=
+detectM2M=false
+reStrategyClass=
+springDaoFile=
+useJavaTypes=true
+keyGenerator=native
+libInstallFolder=/WebRoot/WEB-INF/lib
+addLibs2Project=true
+genVersionTag=false
+sessionFactoryId=
+basePersistenceClass=
+reSettingsFile=
+configFile=/wwdemo/src/hibernate.cfg.xml
+createConfigFile=true
+addLibs2Classpath=true
