@@ -10,11 +10,6 @@
         	<result>success.jsp</result>
         	<result name="input">login.jsp</result>
         </action>
-        
-         <action name="loginx" class="org.kx.actions.LoginAction" method="loginx">
-        	<result>success.jsp</result>
-        	<result name="input">login.jsp</result>
-        </action>
 
         <!-- Add your actions here -->
     </package>
