@@ -3,6 +3,7 @@
 <html>
 	<head>
 		<title>Login</title>
+		<ww:head/>
 	</head>
 	<body>
 
