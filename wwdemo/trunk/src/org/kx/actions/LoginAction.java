@@ -15,10 +15,6 @@ public class LoginAction extends ActionSupport {
 //    public void validate() {
 //	addFieldError("user.name", "invalid name");
 //    }
-    
-    public String loginx() throws Exception {
-	return SUCCESS;
-    }
 
     public User getUser() {
 	return user;
