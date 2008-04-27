@@ -10,6 +10,14 @@
         	<result>success.jsp</result>
         	<result name="input">login.jsp</result>
         </action>
+        
+        <action name="listusers" class="org.kx.actions.UserAction" method="list">
+        	<result>list.jsp</result>
+        </action>
+        
+        <action name="edituser" class="org.kx.actions.UserAction">
+        	<result>edit.jsp</result>
+        </action>
 
         <!-- Add your actions here -->
     </package>

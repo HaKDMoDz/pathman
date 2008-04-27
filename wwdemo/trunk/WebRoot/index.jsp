@@ -10,5 +10,6 @@
 
 	<body>
 		<ww:url id="login" value="login.jsp" /><ww:a href="%{login}">login</ww:a>
+		<ww:url id="list" action="list" /><ww:a href="%{list}">login</ww:a>
 	</body>
 </html>
