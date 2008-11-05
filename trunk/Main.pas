@@ -99,6 +99,15 @@ end;
 
 procedure TfrmMain.ApplyEnvChange;
 begin
+  if btnSystem.Down then
+  begin
+    FSystemPaths.Assign(lstPathList.Items);
+  end
+  else if btnUser.Down then
+  begin
+    FUserPaths.Assign(lstPathList.Items);
+  end;
+           
   ApplyStringsToPath(HKEY_LOCAL_MACHINE, SysEnvKey, FSystemPaths);
   ApplyStringsToPath(HKEY_CURRENT_USER, UserEnvKey, FUserPaths);
 end;
