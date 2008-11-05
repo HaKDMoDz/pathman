@@ -20,19 +20,23 @@ type
     btnClose: TButton;
     btnReplace: TButton;
     Panel1: TPanel;
+    btnApply: TButton;
     procedure btnOKClick(Sender: TObject);
     procedure btnAddClick(Sender: TObject);
     procedure btnRemoveClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure ReadPathToList(ListBox: TListBox);
     procedure btnUpClick(Sender: TObject);
     procedure btnDownClick(Sender: TObject);
-    procedure lstPathListDblClick(Sender: TObject);
     procedure btnReplaceClick(Sender: TObject);
     procedure btnDlgClick(Sender: TObject);
+    procedure btnApplyClick(Sender: TObject);
+    procedure lstPathListDblClick(Sender: TObject);
+
   private
-    { Private declarations }
+    procedure ReadPathToStrings(StrList: TStrings);
+    procedure ApplyStringsToPath(strList: TStrings);
+    procedure Changed(canApply:Boolean);
   public
     { Public declarations }
   end;
@@ -47,7 +51,7 @@ implementation
 
 {$R *.dfm}
 
-procedure TfrmMain.ReadPathToList(ListBox: TListBox);
+procedure TfrmMain.ReadPathToStrings(StrList: TStrings);
 var
   str: String;
 begin
@@ -57,19 +61,14 @@ begin
     if OpenKey(EnvKey,false) then
     begin
       str := ReadString('Path');
-      ExtractStrings([';'],[],PChar(str),ListBox.Items);
+      ExtractStrings([';'],[],PChar(str), strList);
     end;
   finally
     Free;
   end;
 end;
 
-procedure TfrmMain.FormCreate(Sender: TObject);
-begin
-  ReadPathToList(lstPathList);
-end;
-
-procedure TfrmMain.btnOKClick(Sender: TObject);
+procedure TfrmMain.ApplyStringsToPath(strList: TStrings);
 var
   envstr: String;
 begin
@@ -78,8 +77,8 @@ begin
     RootKey := HKEY_LOCAL_MACHINE;
     if OpenKey(EnvKey,false) then
     begin
-      lstPathList.Items.Delimiter := ';';
-      envstr := StringReplace(lstPathList.Items.DelimitedText, '"','',[rfReplaceAll]);
+      strList.Delimiter := ';';
+      envstr := StringReplace(strList.DelimitedText, '"','',[rfReplaceAll]);
       WriteString('Path',envstr);
       SendMessage(HWND_BROADCAST, WM_SETTINGCHANGE, 0, Integer(PChar('Environment')));
       SendMessage(HWND_BROADCAST, WM_WININICHANGE, 0, Integer(PChar('Environment')));
@@ -87,24 +86,61 @@ begin
   finally
     Free;
   end;
+
+end;
+
+procedure TfrmMain.FormCreate(Sender: TObject);
+begin
+  ReadPathToStrings(lstPathList.Items);
+  Changed(false);
+end;
+
+procedure TfrmMain.btnOKClick(Sender: TObject);
+begin
+  ApplyStringsToPath(lstPathList.Items);
   frmMain.Close;
+end;
+
+procedure TfrmMain.btnApplyClick(Sender: TObject);
+begin
+  ApplyStringsToPath(lstPathList.Items);
+  Changed(false);
+end;
+
+procedure TfrmMain.Changed(canApply:Boolean);
+begin
+  if canApply then
+  begin
+    btnApply.Enabled := true;
+  end else
+  begin
+     btnApply.Enabled := False;
+  end;
 end;
 
 procedure TfrmMain.btnAddClick(Sender: TObject);
 begin
   if trim(edtPath.Text) <> '' then
+  begin
     lstPathList.Items.Insert(lstPathList.ItemIndex, edtPath.Text);
+    Changed(true);
+  end;
 end;
 
 procedure TfrmMain.btnRemoveClick(Sender: TObject);
 begin
   lstPathList.DeleteSelected;
+  Changed(true);
 end;
 
 procedure TfrmMain.btnReplaceClick(Sender: TObject);
 begin
   if (edtPath.Text <> '') and (lstPathList.ItemIndex > 0) then
+  begin
     lstPathList.Items[lstPathList.ItemIndex] := edtPath.Text;
+    Changed(true);
+  end;
+
 end;
 
 procedure TfrmMain.btnCloseClick(Sender: TObject);
@@ -120,6 +156,7 @@ begin
     begin
       Items.Exchange(ItemIndex, ItemIndex - 1);
     end;
+    Changed(true);
   end;
 end;
 
@@ -131,6 +168,7 @@ begin
     begin
       Items.Exchange(ItemIndex, ItemIndex + 1);
     end;
+    Changed(true);
   end;
 end;
 
@@ -148,5 +186,5 @@ begin
   if SelectDirectory('Select a directory..', '', aPath) then
     edtPath.Text := aPath
 end;
-
+         
 end.
