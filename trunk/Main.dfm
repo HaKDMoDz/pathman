@@ -1,8 +1,8 @@
 object frmMain: TfrmMain
-  Left = 481
-  Top = 124
+  Left = 417
+  Top = 103
   Width = 425
-  Height = 501
+  Height = 496
   Caption = 'PathMan'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -11,46 +11,32 @@ object frmMain: TfrmMain
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poMainFormCenter
   OnCreate = FormCreate
   DesignSize = (
     417
     469)
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel1: TPanel
-    Left = 0
-    Top = 0
-    Width = 417
-    Height = 417
-    Align = alTop
-    Anchors = [akLeft, akTop, akRight, akBottom]
-    BiDiMode = bdLeftToRight
-    Caption = 'Panel1'
-    ParentBiDiMode = False
-    TabOrder = 11
-    DesignSize = (
-      417
-      417)
-    object btnSystem: TSpeedButton
-      Left = 360
-      Top = 32
-      Width = 49
-      Height = 33
-      Anchors = [akTop, akRight]
-      GroupIndex = 1
-      Caption = 'System'
-      OnClick = btnSystemClick
-    end
-    object btnUser: TSpeedButton
-      Left = 360
-      Top = 72
-      Width = 49
-      Height = 33
-      Anchors = [akTop, akRight]
-      GroupIndex = 1
-      Caption = 'User'
-      OnClick = btnUserClick
-    end
+  object btnSystem: TSpeedButton
+    Left = 360
+    Top = 32
+    Width = 49
+    Height = 33
+    Anchors = [akTop, akRight]
+    GroupIndex = 1
+    Caption = 'System'
+    OnClick = btnSystemClick
+  end
+  object btnUser: TSpeedButton
+    Left = 360
+    Top = 72
+    Width = 49
+    Height = 33
+    Anchors = [akTop, akRight]
+    GroupIndex = 1
+    Caption = 'User'
+    OnClick = btnUserClick
   end
   object lstPathList: TListBox
     Left = 24
@@ -128,7 +114,7 @@ object frmMain: TfrmMain
     Anchors = [akRight, akBottom]
     Caption = '&OK'
     Default = True
-    TabOrder = 8
+    TabOrder = 9
     OnClick = btnOKClick
   end
   object btnClose: TButton
@@ -138,7 +124,7 @@ object frmMain: TfrmMain
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = '&Cancel'
-    TabOrder = 9
+    TabOrder = 10
     OnClick = btnCloseClick
   end
   object btnReplace: TButton
@@ -158,8 +144,16 @@ object frmMain: TfrmMain
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = 'A&pply'
-    TabOrder = 10
+    TabOrder = 11
     OnClick = btnApplyClick
+  end
+  object btnAbout: TButton
+    Left = 24
+    Top = 432
+    Width = 25
+    Height = 25
+    Caption = '?'
+    TabOrder = 8
   end
   object XPManifest1: TXPManifest
     Left = 368

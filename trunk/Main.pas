@@ -19,10 +19,10 @@ type
     XPManifest1: TXPManifest;
     btnClose: TButton;
     btnReplace: TButton;
-    Panel1: TPanel;
     btnApply: TButton;
     btnSystem: TSpeedButton;
     btnUser: TSpeedButton;
+    btnAbout: TButton;
     procedure btnOKClick(Sender: TObject);
     procedure btnAddClick(Sender: TObject);
     procedure btnRemoveClick(Sender: TObject);
