@@ -203,19 +203,19 @@ begin
   //ShowMessage('To be continued...');
   aPath :=  edtPath.Text;
   if SelectDirectory('Select a directory..', '', aPath) then
-    edtPath.Text := aPath
+    edtPath.Text   := aPath
 end;
 
 procedure TfrmMain.btnSystemClick(Sender: TObject);
 begin
   FUserPaths.Assign(lstPathList.Items);
-  lstPathList.Items := FSystemPaths;
+  lstPathList.Items:= FSystemPaths;
 end;
 
 procedure TfrmMain.btnUserClick(Sender: TObject);
 begin
   FSystemPaths.Assign(lstPathList.Items);
-  lstPathList.Items := FUserPaths;
+  lstPathList.Items:= FUserPaths;
 end;
 
 end.

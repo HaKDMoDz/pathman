@@ -1,8 +1,8 @@
 object frmMain: TfrmMain
-  Left = 417
-  Top = 103
-  Width = 425
-  Height = 496
+  Left = 419
+  Top = 105
+  Width = 421
+  Height = 497
   Caption = 'PathMan'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -14,12 +14,12 @@ object frmMain: TfrmMain
   Position = poMainFormCenter
   OnCreate = FormCreate
   DesignSize = (
-    417
-    469)
+    413
+    465)
   PixelsPerInch = 96
   TextHeight = 13
   object btnSystem: TSpeedButton
-    Left = 360
+    Left = 356
     Top = 32
     Width = 49
     Height = 33
@@ -29,7 +29,7 @@ object frmMain: TfrmMain
     OnClick = btnSystemClick
   end
   object btnUser: TSpeedButton
-    Left = 360
+    Left = 356
     Top = 72
     Width = 49
     Height = 33
@@ -41,8 +41,8 @@ object frmMain: TfrmMain
   object lstPathList: TListBox
     Left = 24
     Top = 32
-    Width = 331
-    Height = 297
+    Width = 327
+    Height = 293
     Anchors = [akLeft, akTop, akRight, akBottom]
     ItemHeight = 13
     TabOrder = 0
@@ -50,15 +50,15 @@ object frmMain: TfrmMain
   end
   object edtPath: TEdit
     Left = 24
-    Top = 344
-    Width = 331
+    Top = 340
+    Width = 327
     Height = 21
     Anchors = [akLeft, akRight, akBottom]
     TabOrder = 3
   end
   object btnAdd: TButton
     Left = 24
-    Top = 376
+    Top = 372
     Width = 65
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -67,8 +67,8 @@ object frmMain: TfrmMain
     OnClick = btnAddClick
   end
   object btnUp: TBitBtn
-    Left = 362
-    Top = 264
+    Left = 358
+    Top = 260
     Width = 41
     Height = 25
     Anchors = [akRight, akBottom]
@@ -77,8 +77,8 @@ object frmMain: TfrmMain
     OnClick = btnUpClick
   end
   object btnDown: TBitBtn
-    Left = 362
-    Top = 304
+    Left = 358
+    Top = 300
     Width = 41
     Height = 25
     Anchors = [akRight, akBottom]
@@ -87,8 +87,8 @@ object frmMain: TfrmMain
     OnClick = btnDownClick
   end
   object btnRemove: TButton
-    Left = 183
-    Top = 376
+    Left = 205
+    Top = 373
     Width = 66
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -97,8 +97,8 @@ object frmMain: TfrmMain
     OnClick = btnRemoveClick
   end
   object btnSelectDlg: TButton
-    Left = 362
-    Top = 344
+    Left = 358
+    Top = 340
     Width = 22
     Height = 22
     Anchors = [akRight, akBottom]
@@ -107,29 +107,29 @@ object frmMain: TfrmMain
     OnClick = btnSelectDlgClick
   end
   object btnOK: TButton
-    Left = 146
-    Top = 432
+    Left = 142
+    Top = 428
     Width = 81
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = '&OK'
     Default = True
-    TabOrder = 9
+    TabOrder = 8
     OnClick = btnOKClick
   end
   object btnClose: TButton
-    Left = 234
-    Top = 432
+    Left = 230
+    Top = 428
     Width = 81
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = '&Cancel'
-    TabOrder = 10
+    TabOrder = 9
     OnClick = btnCloseClick
   end
   object btnReplace: TButton
-    Left = 104
-    Top = 376
+    Left = 115
+    Top = 372
     Width = 65
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -138,13 +138,13 @@ object frmMain: TfrmMain
     OnClick = btnReplaceClick
   end
   object btnApply: TButton
-    Left = 322
-    Top = 432
+    Left = 318
+    Top = 428
     Width = 81
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = 'A&pply'
-    TabOrder = 11
+    TabOrder = 10
     OnClick = btnApplyClick
   end
   object btnAbout: TButton
@@ -153,7 +153,7 @@ object frmMain: TfrmMain
     Width = 25
     Height = 25
     Caption = '?'
-    TabOrder = 8
+    TabOrder = 11
   end
   object XPManifest1: TXPManifest
     Left = 368
