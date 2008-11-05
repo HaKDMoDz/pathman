@@ -88,6 +88,7 @@ begin
       strList.Delimiter := ';';
       envstr := StringReplace(strList.DelimitedText, '"','',[rfReplaceAll]);
       WriteString('Path',envstr);
+      
       SendMessage(HWND_BROADCAST, WM_SETTINGCHANGE, 0, Integer(PChar('Environment')));
       SendMessage(HWND_BROADCAST, WM_WININICHANGE, 0, Integer(PChar('Environment')));
     end;
@@ -118,8 +119,10 @@ begin
   FUserPaths := TStringList.Create;
   ReadPathToStrings(HKEY_LOCAL_MACHINE, SysEnvKey, FSystemPaths);
   ReadPathToStrings(HKEY_CURRENT_USER, UserEnvKey, FUserPaths);
+
   lstPathList.Items := FSystemPaths;
   btnSystem.Down := true;
+  
   Changed(false);
 end;
 
