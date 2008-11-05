@@ -154,6 +154,7 @@ object frmMain: TfrmMain
     Height = 25
     Caption = '?'
     TabOrder = 11
+    Visible = False
   end
   object XPManifest1: TXPManifest
     Left = 368
