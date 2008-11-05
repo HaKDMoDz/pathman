@@ -3,8 +3,8 @@ unit main;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Registry, Buttons, XPMan, ExtCtrls, FileCtrl;
+  Windows, Messages, SysUtils, Classes, Controls, Forms,
+  StdCtrls, Registry, Buttons, XPMan, ExtCtrls, FileCtrl;
 
 type
   TfrmMain = class(TForm)
@@ -14,7 +14,7 @@ type
     btnUp: TBitBtn;
     btnDown: TBitBtn;
     btnRemove: TButton;
-    btnDlg: TButton;
+    btnSelectDlg: TButton;
     btnOK: TButton;
     XPManifest1: TXPManifest;
     btnClose: TButton;
@@ -31,22 +31,26 @@ type
     procedure btnUpClick(Sender: TObject);
     procedure btnDownClick(Sender: TObject);
     procedure btnReplaceClick(Sender: TObject);
-    procedure btnDlgClick(Sender: TObject);
+    procedure btnSelectDlgClick(Sender: TObject);
     procedure btnApplyClick(Sender: TObject);
     procedure lstPathListDblClick(Sender: TObject);
+    procedure btnSystemClick(Sender: TObject);
+    procedure btnUserClick(Sender: TObject);
   private
     FSystemPaths: TStrings;
     FUserPaths:   TStrings;
 
-    procedure ReadPathToStrings(StrList: TStrings);
-    procedure ApplyStringsToPath(strList: TStrings);
+    procedure ReadPathToStrings(aRoot:HKEY; aKey:string; StrList: TStrings);
+    procedure ApplyStringsToPath(aRoot:HKEY; aKey:string; strList: TStrings);
     procedure Changed(canApply:Boolean);
+    procedure ApplyEnvChange;
   public
     { Public declarations }
   end;
 
 const
-  EnvKey = 'System\CurrentControlSet\Control\Session Manager\Environment';
+  SysEnvKey = 'System\CurrentControlSet\Control\Session Manager\Environment';
+  UserEnvKey = 'Environment';
 var
   frmMain: TfrmMain;
 
@@ -55,14 +59,14 @@ implementation
 
 {$R *.dfm}
 
-procedure TfrmMain.ReadPathToStrings(StrList: TStrings);
+procedure TfrmMain.ReadPathToStrings(aRoot:HKEY; aKey:string; StrList: TStrings);
 var
   str: String;
 begin
   with TRegistry.Create do
   try
-    RootKey := HKEY_LOCAL_MACHINE;
-    if OpenKey(EnvKey,false) then
+    RootKey := aRoot ;
+    if OpenKey(aKey,false) then
     begin
       str := ReadString('Path');
       ExtractStrings([';'],[],PChar(str), strList);
@@ -72,14 +76,14 @@ begin
   end;
 end;
 
-procedure TfrmMain.ApplyStringsToPath(strList: TStrings);
+procedure TfrmMain.ApplyStringsToPath(aRoot:HKEY; aKey:string; strList: TStrings);
 var
   envstr: String;
 begin
   with TRegistry.Create do
   try
-    RootKey := HKEY_LOCAL_MACHINE;
-    if OpenKey(EnvKey,false) then
+    RootKey := aRoot;
+    if OpenKey(aKey,false) then
     begin
       strList.Delimiter := ';';
       envstr := StringReplace(strList.DelimitedText, '"','',[rfReplaceAll]);
@@ -93,10 +97,18 @@ begin
 
 end;
 
+procedure TfrmMain.ApplyEnvChange;
+begin
+  ApplyStringsToPath(HKEY_LOCAL_MACHINE, SysEnvKey, FSystemPaths);
+  ApplyStringsToPath(HKEY_CURRENT_USER, UserEnvKey, FUserPaths);
+end;
+
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
   FSystemPaths := TStringList.Create;
-  ReadPathToStrings(FSystemPaths);
+  FUserPaths := TStringList.Create;
+  ReadPathToStrings(HKEY_LOCAL_MACHINE, SysEnvKey, FSystemPaths);
+  ReadPathToStrings(HKEY_CURRENT_USER, UserEnvKey, FUserPaths);
   lstPathList.Items := FSystemPaths;
   btnSystem.Down := true;
   Changed(false);
@@ -104,13 +116,13 @@ end;
 
 procedure TfrmMain.btnOKClick(Sender: TObject);
 begin
-  ApplyStringsToPath(lstPathList.Items);
+  ApplyEnvChange;
   frmMain.Close;
 end;
 
 procedure TfrmMain.btnApplyClick(Sender: TObject);
 begin
-  ApplyStringsToPath(lstPathList.Items);
+  ApplyEnvChange;  
   Changed(false);
 end;
 
@@ -184,7 +196,7 @@ begin
   edtPath.Text := lstPathList.Items[lstPathList.itemIndex];
 end;
 
-procedure TfrmMain.btnDlgClick(Sender: TObject);
+procedure TfrmMain.btnSelectDlgClick(Sender: TObject);
 var
   aPath: String;
 begin
@@ -192,6 +204,18 @@ begin
   aPath :=  edtPath.Text;
   if SelectDirectory('Select a directory..', '', aPath) then
     edtPath.Text := aPath
+end;
+
+procedure TfrmMain.btnSystemClick(Sender: TObject);
+begin
+  FUserPaths.Assign(lstPathList.Items);
+  lstPathList.Items := FSystemPaths;
+end;
+
+procedure TfrmMain.btnUserClick(Sender: TObject);
+begin
+  FSystemPaths.Assign(lstPathList.Items);
+  lstPathList.Items := FUserPaths;
 end;
 
 end.
