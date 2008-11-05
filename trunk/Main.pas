@@ -21,6 +21,8 @@ type
     btnReplace: TButton;
     Panel1: TPanel;
     btnApply: TButton;
+    btnSystem: TSpeedButton;
+    btnUser: TSpeedButton;
     procedure btnOKClick(Sender: TObject);
     procedure btnAddClick(Sender: TObject);
     procedure btnRemoveClick(Sender: TObject);
@@ -32,8 +34,10 @@ type
     procedure btnDlgClick(Sender: TObject);
     procedure btnApplyClick(Sender: TObject);
     procedure lstPathListDblClick(Sender: TObject);
-
   private
+    FSystemPaths: TStrings;
+    FUserPaths:   TStrings;
+
     procedure ReadPathToStrings(StrList: TStrings);
     procedure ApplyStringsToPath(strList: TStrings);
     procedure Changed(canApply:Boolean);
@@ -91,7 +95,10 @@ end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
-  ReadPathToStrings(lstPathList.Items);
+  FSystemPaths := TStringList.Create;
+  ReadPathToStrings(FSystemPaths);
+  lstPathList.Items := FSystemPaths;
+  btnSystem.Down := true;
   Changed(false);
 end;
 
@@ -186,5 +193,5 @@ begin
   if SelectDirectory('Select a directory..', '', aPath) then
     edtPath.Text := aPath
 end;
-         
+
 end.
