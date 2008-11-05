@@ -1,0 +1,2 @@
+1. drag-drop style of listbox
+2. about dialog
