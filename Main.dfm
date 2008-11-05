@@ -1,6 +1,6 @@
 object frmMain: TfrmMain
-  Left = 450
-  Top = 134
+  Left = 481
+  Top = 124
   Width = 425
   Height = 501
   Caption = 'PathMan'
@@ -39,6 +39,7 @@ object frmMain: TfrmMain
       Anchors = [akTop, akRight]
       GroupIndex = 1
       Caption = 'System'
+      OnClick = btnSystemClick
     end
     object btnUser: TSpeedButton
       Left = 360
@@ -48,6 +49,7 @@ object frmMain: TfrmMain
       Anchors = [akTop, akRight]
       GroupIndex = 1
       Caption = 'User'
+      OnClick = btnUserClick
     end
   end
   object lstPathList: TListBox
@@ -108,7 +110,7 @@ object frmMain: TfrmMain
     TabOrder = 7
     OnClick = btnRemoveClick
   end
-  object btnDlg: TButton
+  object btnSelectDlg: TButton
     Left = 362
     Top = 344
     Width = 22
@@ -116,7 +118,7 @@ object frmMain: TfrmMain
     Anchors = [akRight, akBottom]
     Caption = '...'
     TabOrder = 4
-    OnClick = btnDlgClick
+    OnClick = btnSelectDlgClick
   end
   object btnOK: TButton
     Left = 146
