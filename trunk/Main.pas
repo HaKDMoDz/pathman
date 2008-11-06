@@ -186,8 +186,8 @@ begin
     if ItemIndex > 0 then
     begin
       Items.Exchange(ItemIndex, ItemIndex - 1);
+      Changed(true);
     end;
-    Changed(true);
   end;
 end;
 
@@ -198,8 +198,8 @@ begin
     if (ItemIndex <> -1)  and (ItemIndex < Count-1) then
     begin
       Items.Exchange(ItemIndex, ItemIndex + 1);
+      Changed(true);
     end;
-    Changed(true);
   end;
 end;
 
