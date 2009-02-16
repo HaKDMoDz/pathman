@@ -1,2 +1,4 @@
-1. drag-drop style of listbox
-2. about dialog
+1. disable apply button when applied
+2. drag-drop style of listbox
+3. find filter
+4. about dialog

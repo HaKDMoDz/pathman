@@ -1,5 +1,7 @@
 program PathMan;
 
+{%File 'todo.txt'}
+
 uses
   Forms,
   Main in 'Main.pas' {frmMain};

@@ -1,10 +1,12 @@
 object frmMain: TfrmMain
-  Left = 419
-  Top = 105
+  Left = 436
+  Top = 103
   Width = 421
   Height = 497
   Caption = 'PathMan'
   Color = clBtnFace
+  Constraints.MinHeight = 497
+  Constraints.MinWidth = 421
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -15,7 +17,7 @@ object frmMain: TfrmMain
   OnCreate = FormCreate
   DesignSize = (
     413
-    465)
+    462)
   PixelsPerInch = 96
   TextHeight = 13
   object btnSystem: TSpeedButton
