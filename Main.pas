@@ -7,6 +7,8 @@ uses
   StdCtrls, Registry, Buttons, XPMan, ExtCtrls, FileCtrl;
 
 type
+  TDisplayState = (system, user);
+  
   TfrmMain = class(TForm)
     lstPathList: TListBox;
     edtPath: TEdit;
@@ -39,6 +41,7 @@ type
   private
     FSystemPaths: TStrings;
     FUserPaths:   TStrings;
+    FCurButton:   TDisplayState;
 
     procedure ReadPathToStrings(aRoot:HKEY; aKey:string; StrList: TStrings);
     procedure ApplyStringsToPath(aRoot:HKEY; aKey:string; strList: TStrings);
@@ -128,7 +131,10 @@ end;
 
 procedure TfrmMain.btnOKClick(Sender: TObject);
 begin
-  ApplyEnvChange;
+  if btnApply.Enabled <> False then
+  begin
+    ApplyEnvChange;
+  end;
   frmMain.Close;
 end;
 
@@ -220,14 +226,18 @@ end;
 
 procedure TfrmMain.btnSystemClick(Sender: TObject);
 begin
+  if FCurButton = system then Exit;
   FUserPaths.Assign(lstPathList.Items);
   lstPathList.Items:= FSystemPaths;
+  FCurButton := system;
 end;
 
 procedure TfrmMain.btnUserClick(Sender: TObject);
 begin
+  if FCurButton = user then Exit;
   FSystemPaths.Assign(lstPathList.Items);
   lstPathList.Items:= FUserPaths;
+  FCurButton := user;
 end;
 
 end.
